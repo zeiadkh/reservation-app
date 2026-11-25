@@ -8,9 +8,23 @@ import {
   Post,
   Query,
   UseGuards,
-  Req
+  Req,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+import {
+  ApiBearerAuth,
+  ApiTags,
+  ApiOperation,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiBadRequestResponse,
+  ApiUnauthorizedResponse,
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiConflictResponse,
+  ApiParam,
+} from '@nestjs/swagger';
+
 import { ResourcesService } from './resources-service.js';
 import { CreateResourceDto } from './dto/create-resource.dto.js';
 import { UpdateResourceDto } from './dto/update-resource.dto.js';
@@ -30,27 +44,53 @@ export class ResourcesController {
 
   @Post()
   @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: '(Admin only)' })
+  @ApiCreatedResponse({ description: 'Resource created successfully.' })
+  @ApiBadRequestResponse({ description: 'Invalid resource data.' })
+  @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
+  @ApiForbiddenResponse({ description: 'Only admins can create resources.' })
+  @ApiConflictResponse({ description: 'A resource with conflicting data already exists.' })
   create(@Body() dto: CreateResourceDto) {
     return this.resourcesService.create(dto);
   }
 
   @Get()
   @Roles(UserRole.ADMIN, UserRole.CUSTOMER)
+  @ApiOperation({
+    description:
+      'Customers can view active resources. Admins can view all resources.',
+  })
+  @ApiOkResponse({ description: 'Resources retrieved successfully.' })
+  @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
+  @ApiForbiddenResponse({ description: 'The user role is not allowed to access this endpoint.' })
   findAll(
-  @Query() query: ResourceQueryDto,
-  @Req() req: { user: { role: UserRole } },
-) {
-  return this.resourcesService.findAll(query, req.user.role);
-}
+    @Query() query: ResourceQueryDto,
+    @Req() req: { user: { role: UserRole } },
+  ) {
+    return this.resourcesService.findAll(query, req.user.role);
+  }
 
   @Get(':id')
   @Roles(UserRole.ADMIN, UserRole.CUSTOMER)
+  @ApiParam({ name: 'id', description: 'Resource MongoDB ObjectId' })
+  @ApiOkResponse({ description: 'Resource retrieved successfully.' })
+  @ApiBadRequestResponse({ description: 'Invalid resource ID.' })
+  @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
+  @ApiNotFoundResponse({ description: 'Resource not found or inactive.' })
   findOne(@Param('id') id: string) {
     return this.resourcesService.findOne(id);
   }
 
   @Patch(':id')
   @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: '(Admin only)' })
+  @ApiParam({ name: 'id', description: 'Resource MongoDB ObjectId' })
+  @ApiOkResponse({ description: 'Resource updated successfully.' })
+  @ApiBadRequestResponse({ description: 'Invalid resource ID or update data.' })
+  @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
+  @ApiForbiddenResponse({ description: 'Only admins can update resources.' })
+  @ApiNotFoundResponse({ description: 'Resource not found.' })
+  @ApiConflictResponse({ description: 'The update conflicts with existing resource data.' })
   update(
     @Param('id') id: string,
     @Body() dto: UpdateResourceDto,
@@ -60,6 +100,13 @@ export class ResourcesController {
 
   @Delete(':id')
   @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: '(Admin only)' })
+  @ApiParam({ name: 'id', description: 'Resource MongoDB ObjectId' })
+  @ApiOkResponse({ description: 'Resource deleted successfully.' })
+  @ApiBadRequestResponse({ description: 'Invalid resource ID.' })
+  @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
+  @ApiForbiddenResponse({ description: 'Only admins can delete resources.' })
+  @ApiNotFoundResponse({ description: 'Resource not found.' })
   remove(@Param('id') id: string) {
     return this.resourcesService.remove(id);
   }
