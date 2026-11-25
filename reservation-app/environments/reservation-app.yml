@@ -1,0 +1,7 @@
+name: reservation-app
+variables:
+  - name: url
+    value: localhost:3000
+    description: ""
+  - secret: true
+    name: token
