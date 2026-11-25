@@ -8,6 +8,7 @@ import {
   Post,
   Query,
   UseGuards,
+  Req
 } from '@nestjs/common';
 
 import { ResourcesService } from './resources-service.js';
@@ -33,9 +34,12 @@ export class ResourcesController {
 
   @Get()
   @Roles(UserRole.ADMIN, UserRole.CUSTOMER)
-  findAll(@Query() query: ResourceQueryDto) {
-    return this.resourcesService.findAll(query);
-  }
+  findAll(
+  @Query() query: ResourceQueryDto,
+  @Req() req: { user: { role: UserRole } },
+) {
+  return this.resourcesService.findAll(query, req.user.role);
+}
 
   @Get(':id')
   @Roles(UserRole.ADMIN, UserRole.CUSTOMER)
