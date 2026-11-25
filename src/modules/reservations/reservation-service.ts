@@ -6,7 +6,8 @@ import {
 } from '@nestjs/common';
 
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
-import { Model, QueryFilter, Types, Connection, ClientSession } from 'mongoose';
+import type {Model, QueryFilter, ClientSession, Connection } from 'mongoose';
+import {Types} from "mongoose";
 
 import {
   Reservation,

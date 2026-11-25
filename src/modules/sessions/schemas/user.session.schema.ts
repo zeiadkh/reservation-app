@@ -1,6 +1,7 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
+import type { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
+import { Types } from 'mongoose';
 import { User } from '../../users/schemas/user.shema.js';
 
 export type UserSessionDocument = HydratedDocument<UserSession>;
@@ -8,11 +9,11 @@ export type UserSessionDocument = HydratedDocument<UserSession>;
 @Schema({ timestamps: true, collection: 'user_sessions' })
 export class UserSession {
   @Prop({
-    type: MongooseSchema.Types.ObjectId,
+    type: Types.ObjectId,
     ref: User.name,
     required: true,
   })
-  userId: MongooseSchema.Types.ObjectId;
+  userId: Types.ObjectId;
 
   @Prop({
     required: true,
