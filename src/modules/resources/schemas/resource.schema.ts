@@ -39,9 +39,6 @@ export class OperatingHours {
 
   @Prop({ type: String })
   closeTime?: string;
-
-  @Prop({ type: Number, default: 0, select: false })
-  reservationLockVersion: number;
 }
 
 export const OperatingHoursSchema =
@@ -104,6 +101,9 @@ export class Resource {
     default: null,
   })
   deletedAt: Date | null;
+
+  @Prop({ type: Number, default: 0, select: false })
+  reservationLockVersion: number;
 }
 
 export const ResourceSchema = SchemaFactory.createForClass(Resource);
