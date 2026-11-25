@@ -10,7 +10,7 @@ import {
   UseGuards,
   Req
 } from '@nestjs/common';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResourcesService } from './resources-service.js';
 import { CreateResourceDto } from './dto/create-resource.dto.js';
 import { UpdateResourceDto } from './dto/update-resource.dto.js';
@@ -21,6 +21,8 @@ import { RolesGuard } from '../auth/guards/roles.guard.js';
 import { Roles } from '../auth/decrotaors/roles.decorator.js';
 import { UserRole } from '../users/schemas/user.shema.js';
 
+@ApiTags('Resources')
+@ApiBearerAuth()
 @Controller('resources')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class ResourcesController {

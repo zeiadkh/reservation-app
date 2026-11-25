@@ -5,6 +5,8 @@ import { RegisterDto } from './dto/register.dto.js';
 import { LoginDto } from './dto/login.dto.js';
 import { RefreshTokenDto } from './dto/refresh-token.dto.js';
 
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

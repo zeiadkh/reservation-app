@@ -22,7 +22,7 @@ import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { RolesGuard } from '../auth/guards/roles.guard.js';
 import { Roles } from '../auth/decrotaors/roles.decorator.js';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 interface AuthenticatedRequest {
   user: {
     sub: string;
@@ -30,6 +30,8 @@ interface AuthenticatedRequest {
   };
 }
 
+@ApiTags('Reservations')
+@ApiBearerAuth()
 @Controller('reservations')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class ReservationsController {

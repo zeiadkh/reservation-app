@@ -28,7 +28,7 @@ import { AuthModule } from './modules/auth/auth.module.js';
     ReservationModule,
     AuthModule
   ],
-  controllers: [AppController],
+  // controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
