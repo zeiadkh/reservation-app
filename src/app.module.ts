@@ -9,6 +9,7 @@ import { UsersModule } from './modules/users/users.module.js';
 import { SessionsModule } from './modules/sessions/sessions.module.js';
 import { ResourcesModule } from './modules/resources/resources.module.js';
 import { ReservationModule } from './modules/reservations/reservation.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { ReservationModule } from './modules/reservations/reservation.module.js'
     UsersModule,
     SessionsModule,
     ResourcesModule,
-    ReservationModule
+    ReservationModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

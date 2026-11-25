@@ -1,0 +1,54 @@
+info:
+  name: login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: localhost:3000/auth/login
+  body:
+    type: json
+    data: '{"email": "mail2@gmail.com", "password": "12345678"}'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: tokens
+    request:
+      url: localhost:3000/auth/login
+      method: POST
+      body:
+        type: json
+        data: '{"email": "mail2@gmail.com", "password": "12345678"}'
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: x-powered-by
+          value: Express
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: content-length
+          value: "493"
+        - name: etag
+          value: W/"1ed-4K51uAiaOdelpkYWOv2/dNcciL4"
+        - name: date
+          value: Wed, 25 Nov 2026 10:03:13 GMT
+        - name: connection
+          value: keep-alive
+        - name: keep-alive
+          value: timeout=5
+      body:
+        type: json
+        data: |-
+          {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2YjE3MDRmZDRkYzc3YWE0Zjc2NmMiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3OTU2MDA5OTMsImV4cCI6MTc5NTYwMTg5M30.qo4LEhPe4NcXp7un8dngpRf995lRayV4_sOLNn7f3ww",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2YjE3MDRmZDRkYzc3YWE0Zjc2NmMiLCJyb2xlIjoiQ1VTVE9NRVIiLCJzaWQiOiI2YjA2YjI2MTRmZDRkYzc3YWE0Zjc2NmQiLCJpYXQiOjE3OTU2MDA5OTMsImV4cCI6MTc5NjIwNTc5M30.40jnzhRIhbJBVKEG-8DGKcLJQu38DkZdu8jgGZEk6Pg",
+            "tokenType": "Bearer"
+          }
