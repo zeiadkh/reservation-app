@@ -3,10 +3,12 @@ import { AppModule } from './app.module.js';
 import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { GenerallExceptionsFilter } from './helper/generall-exceptions.js';
 dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new GenerallExceptionsFilter())
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
