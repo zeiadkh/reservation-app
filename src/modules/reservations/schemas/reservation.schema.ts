@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   HydratedDocument,
   Schema as MongooseSchema,
+  Types
 } from 'mongoose';
 
 import { User } from '../../users/schemas/user.shema.js';
@@ -25,14 +26,14 @@ export class Reservation {
     ref: User.name,
     required: true,
   })
-  userId: MongooseSchema.Types.ObjectId;
+  userId: Types.ObjectId;
 
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     ref: Resource.name,
     required: true,
   })
-  resourceId: MongooseSchema.Types.ObjectId;
+  resourceId: Types.ObjectId;
 
   @Prop({
     type: Date,
