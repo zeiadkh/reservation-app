@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
-import type {Model, QueryFilter, ClientSession, Connection } from 'mongoose';
-import {Types} from "mongoose";
+import type { Model, QueryFilter, ClientSession, Connection } from 'mongoose';
+import { Types } from 'mongoose';
 
 import {
   Reservation,
@@ -24,6 +24,7 @@ import { ReservationQueryDto } from './dto/query-reservations.dto.js';
 import { UpdateReservationDto } from './dto/update-reservation.dto.js';
 
 import { CheckAvailabilityDto } from './dto/check-availability.dto.js';
+import { UserRole } from '../users/schemas/user.shema.js';
 
 const PENDING_RESERVATION_LEASE_MS = 10 * 60 * 1000;
 
@@ -353,6 +354,7 @@ export class ReservationsService {
   async updateReservation(
     reservationId: string,
     userId: string,
+    role: UserRole,
     updateDto: UpdateReservationDto,
   ) {
     if (Object.keys(updateDto).length === 0) {
@@ -365,7 +367,10 @@ export class ReservationsService {
       return await session.withTransaction(async () => {
         // 1. Find the reservation inside the transaction
         const reservation = await this.reservationModel
-          .findOne({ _id: reservationId, userId })
+          .findOne({
+            _id: reservationId,
+            ...(role === UserRole.CUSTOMER ? { userId } : {}),
+          })
           .session(session);
 
         if (!reservation) {

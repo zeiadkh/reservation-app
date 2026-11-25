@@ -79,13 +79,18 @@ export class ReservationsController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.CUSTOMER)
+  @Roles(UserRole.CUSTOMER, UserRole.ADMIN)
   updateReservation(
     @Param('id') id: string,
-    @Req() req: AuthenticatedRequest,
+    @Req() req: { user: { sub: string; role: UserRole } },
     @Body() dto: UpdateReservationDto,
   ) {
-    return this.reservationsService.updateReservation(id, req.user.sub, dto);
+    return this.reservationsService.updateReservation(
+      id,
+      req.user.sub,
+      req.user.role,
+      dto,
+    );
   }
 
   @Patch(':id/cancel')
