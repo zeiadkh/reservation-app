@@ -1,0 +1,21 @@
+info:
+  name: update reservation
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{url}}/reservations/6b0841584139ccec208f3ceb"
+  body:
+    type: json
+    data: '{"guestCount": 4}'
+  auth:
+    type: bearer
+    token: "{{adminToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

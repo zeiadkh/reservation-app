@@ -1,0 +1,21 @@
+info:
+  name: update resource
+  type: http
+  seq: 3
+
+http:
+  method: PATCH
+  url: "{{url}}/resources/6b0825fcbd53a1e874e1392e"
+  body:
+    type: json
+    data: '{"isActive": false}'
+  auth:
+    type: bearer
+    token: "{{adminToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

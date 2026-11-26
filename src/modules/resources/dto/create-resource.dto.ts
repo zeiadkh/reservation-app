@@ -13,15 +13,9 @@ import {
 } from 'class-validator';
 
 import { Type } from 'class-transformer';
-import {
-  ApiProperty,
-  ApiPropertyOptional,
-} from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import {
-  ResourceType,
-  WeekDay,
-} from '../schemas/resource.schema.js';
+import { ResourceType, WeekDay } from '../schemas/resource.schema.js';
 
 class OperatingHoursDto {
   @ApiProperty({
@@ -124,4 +118,11 @@ export class CreateResourceDto {
   @ValidateNested({ each: true })
   @Type(() => OperatingHoursDto)
   operatingHours: OperatingHoursDto[];
+  @ApiPropertyOptional({
+    example: false,
+    description: 'Activate or deactivate the resource',
+  })
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
 }

@@ -3,5 +3,29 @@ variables:
   - name: url
     value: localhost:3000
     description: ""
+  - name: customerToken
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA4M2NjMGFkNjQ2MTc1ZDUyNTAwNWYiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3OTU3MDcyMDMsImV4cCI6MTc5NTcwODEwM30.FxSID8JQDIlS-_Uao6cT3zcLzvgeRTpQDG4YjdRt8vc
+    description: ""
+  - name: adminToken
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2ZTU5MWYxY2JiMjUxM2Q3YjE2ZTkiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3OTU3MDczMTksImV4cCI6MTc5NTcwODIxOX0.OlbK6mTWoifpuzD_V0GmlY3MH1swl2FM3E1N2H1uCAk
+    description: ""
+  - name: customerId
+    value: 6b06b1704fd4dc77aa4f766c
+    description: ""
+  - name: resourceId
+    value: ""
+    description: ""
+  - name: reservationId
+    value: ""
+    description: ""
+  - name: admin-refresh-token
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2ZTU5MWYxY2JiMjUxM2Q3YjE2ZTkiLCJyb2xlIjoiQURNSU4iLCJzaWQiOiI2YjA4MWY5Yzg2Y2E0MDc1YTNlOGJhMDUiLCJpYXQiOjE3OTU2OTQ0OTIsImV4cCI6MTc5NjI5OTI5Mn0.1niBKYbIwRhdSd7_rXKOFtxcCg1Dke_PGtBtaQ6b-sc
+    description: ""
+  - name: customer-refresh-token
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA4M2NjMGFkNjQ2MTc1ZDUyNTAwNWYiLCJyb2xlIjoiQ1VTVE9NRVIiLCJzaWQiOiI2YjA4M2NlYWFkNjQ2MTc1ZDUyNTAwNjAiLCJpYXQiOjE3OTU3MDE5OTQsImV4cCI6MTc5NjMwNjc5NH0.72eus8nlTvf02Pup6pR7je-S-vVNiK1tHi2rWS5b2wA
+    description: ""
+  - name: reservation-id
+    value: 6b082f81d510e32e2f9dd09f
+    description: ""
   - secret: true
     name: token

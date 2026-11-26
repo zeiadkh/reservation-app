@@ -8,7 +8,7 @@ http:
   url: localhost:3000/auth/register
   body:
     type: json
-    data: '{"email": "mail2@gmail.com", "password": "12345678", "name": "name1"}'
+    data: '{"email": "user2@gmail.com", "password": "123456780", "name": "name1"}'
   auth: inherit
 
 settings:

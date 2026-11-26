@@ -1,0 +1,20 @@
+info:
+  name: profile
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{url}}/users/me"
+  headers:
+    - name: Authorization
+      value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2YjE3MDRmZDRkYzc3YWE0Zjc2NmMiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3OTU2ODUyODMsImV4cCI6MTc5NTY4NjE4M30.l3dg3fNhxi9tEA4VrIOtuvEaqxQOZjgU5nSSRvSc-qg     "
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

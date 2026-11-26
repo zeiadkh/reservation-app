@@ -1,0 +1,42 @@
+info:
+  name: create resources
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/resources"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Meeting Room E",
+        "description": "A meeting room for team sessions",
+        "type": "MEETING_ROOM",
+        "capacity": 10,
+        "location": "Floor 2",
+        "operatingHours": [
+          {
+            "day": "MONDAY",
+            "isOpen": true,
+            "openTime": "09:00",
+            "closeTime": "17:00"
+          },
+          {
+            "day": "TUESDAY",
+            "isOpen": true,
+            "openTime": "09:00",
+            "closeTime": "17:00"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{adminToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

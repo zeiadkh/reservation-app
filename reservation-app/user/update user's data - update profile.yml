@@ -1,0 +1,23 @@
+info:
+  name: update user's data / update profile
+  type: http
+  seq: 2
+
+http:
+  method: PATCH
+  url: "{{url}}/users/me"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Updated Customer",
+        "email": "updated.customer@example.com"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

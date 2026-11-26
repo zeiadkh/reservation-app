@@ -1,0 +1,18 @@
+info:
+  name: delete resource
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{url}}/resources/6b0825fcbd53a1e874e1392e"
+  auth:
+    type: bearer
+    token: "{{adminToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

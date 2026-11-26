@@ -17,7 +17,7 @@ config:
 request:
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjA2YjE3MDRmZDRkYzc3YWE0Zjc2NmMiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3OTU2MTQzMzcsImV4cCI6MTc5NTYxNTIzN30.jEmEVocinYKRUIvxRD0B0GQOfH8_1bMK40cWJ44Sti8
+    token: "{{customerToken}}"
 bundled: false
 extensions:
   bruno:

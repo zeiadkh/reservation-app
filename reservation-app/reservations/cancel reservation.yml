@@ -1,0 +1,16 @@
+info:
+  name: cancel reservation
+  type: http
+  seq: 6
+
+http:
+  method: PATCH
+  url: "{{url}}/reservations/6b0841584139ccec208f3ceb/cancel"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

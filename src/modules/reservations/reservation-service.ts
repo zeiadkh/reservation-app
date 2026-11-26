@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   BadRequestException,
   Injectable,
@@ -218,7 +219,7 @@ export class ReservationsService {
     session?: ClientSession,
   ) {
     const filter = {
-      resourceId,
+      resourceId: new Types.ObjectId(resourceId),
       startAt: { $lt: endDate },
       endAt: { $gt: startDate },
       $or: [
@@ -314,18 +315,18 @@ export class ReservationsService {
     return filter;
   }
 
-  async getMyReservations(userId: string, query: ReservationQueryDto) {
-    const filter = this.buildReservationFilter(query);
+ async getMyReservations(userId: string, query: ReservationQueryDto) {
+  const filter = this.buildReservationFilter(query);
 
-    const reservations = await this.reservationModel
-      .find({
-        ...filter,
-        userId,
-      } as QueryFilter<Reservation>)
-      .sort({ createdAt: -1 });
+  const reservations = await this.reservationModel
+    .find({
+      ...filter,
+      userId: new Types.ObjectId(userId),
+    })
+    .sort({ createdAt: -1 });
 
-    return reservations;
-  }
+  return reservations;
+}
 
   async getReservationById(reservationId: string, userId?: string) {
     const filter: QueryFilter<Reservation> = {
@@ -333,7 +334,7 @@ export class ReservationsService {
     };
 
     if (userId) {
-      filter.userId = userId;
+      filter.userId = new Types.ObjectId(userId);
     }
 
     const reservation = await this.reservationModel.findOne(filter);
@@ -369,7 +370,7 @@ export class ReservationsService {
         const reservation = await this.reservationModel
           .findOne({
             _id: reservationId,
-            ...(role === UserRole.CUSTOMER ? { userId } : {}),
+            ...(role === UserRole.CUSTOMER ? { userId: new Types.ObjectId(userId) } : {}),
           })
           .session(session);
 
@@ -490,7 +491,7 @@ export class ReservationsService {
   async cancelMyReservation(reservationId: string, userId: string) {
     const reservation = await this.reservationModel.findOne({
       _id: reservationId,
-      userId,
+      userId: new Types.ObjectId(userId),
     });
 
     if (!reservation) {

@@ -87,19 +87,21 @@ export class ResourcesService {
   return this.resourceModel.find(filter).sort({ createdAt: -1 });
 }
 
-  async findOne(resourceId: string) {
-    const resource = await this.resourceModel.findOne({
-      _id: resourceId,
-      deletedAt: null,
-      isActive: true,
-    });
+  async findOne(id: string, role: UserRole) {
+  const filter: any = { _id: id };
 
-    if (!resource) {
-      throw new NotFoundException('Resource not found');
-    }
-
-    return resource;
+  if (role === UserRole.CUSTOMER) {
+    filter.isActive = true;
   }
+
+  const resource = await this.resourceModel.findOne(filter);
+
+  if (!resource) {
+    throw new NotFoundException('Resource not found');
+  }
+
+  return resource;
+}
 
   async update(resourceId: string, dto: UpdateResourceDto) {
     if (Object.keys(dto).length === 0) {

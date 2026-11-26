@@ -5,10 +5,10 @@ info:
 
 http:
   method: POST
-  url: localhost:3000/auth/login
+  url: "{{url}}/auth/login"
   body:
     type: json
-    data: '{"email": "mail2@gmail.com", "password": "12345678"}'
+    data: '{"email": "user2@gmail.com", "password": "123456780"}'
   auth: inherit
 
 settings:

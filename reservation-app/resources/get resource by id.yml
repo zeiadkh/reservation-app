@@ -1,0 +1,18 @@
+info:
+  name: get resource by id
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{url}}/resources/6b0825fcbd53a1e874e1392e"
+  auth:
+    type: bearer
+    token: "{{customerToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

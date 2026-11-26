@@ -77,8 +77,9 @@ export class ResourcesController {
   @ApiBadRequestResponse({ description: 'Invalid resource ID.' })
   @ApiUnauthorizedResponse({ description: 'Authentication is required.' })
   @ApiNotFoundResponse({ description: 'Resource not found or inactive.' })
-  findOne(@Param('id') id: string) {
-    return this.resourcesService.findOne(id);
+  findOne(@Param('id') id: string,
+  @Req() req: { user: { role: UserRole } },) {
+    return this.resourcesService.findOne(id, req.user.role);
   }
 
   @Patch(':id')
